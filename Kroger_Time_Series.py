@@ -1,6 +1,10 @@
 import streamlit as st
-import appdirs as ad
-ad.user_cache_dir = lambda *args: "/tmp"
+
+import os
+# Set a valid cache directory path
+cache_dir = "/tmp"
+os.makedirs(cache_dir, exist_ok=True)
+
 import yfinance as yf
 import numpy as np
 import pandas as pd
