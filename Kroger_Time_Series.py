@@ -1,6 +1,4 @@
 import streamlit as st
-
-pip install yfinance
 import yfinance as yf
 import numpy as np
 import pandas as pd
