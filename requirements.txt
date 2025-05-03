@@ -2,6 +2,7 @@ yfinance
 streamlit
 pandas
 numpy
+scipy
 matplotlib
 statsmodels
 arch
