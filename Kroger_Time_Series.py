@@ -2,7 +2,6 @@ import streamlit as st
 import yfinance as yf
 import numpy as np
 import pandas as pd
-
 import datetime as dt
 from dateutil.relativedelta import relativedelta
 
@@ -22,12 +21,24 @@ from arch import arch_model
 
 st.title("Time Series Analysis on Kroger Stock Daily Returns")
 
-st.markdown(""":blue[**Project Description: We analyze Kroger's stock returns using linear time series methods by 
-testing for autocorrelations in the returns and fitting an ARMA model.
-Subsequently, we check for potential ARCH effects and fit a GARCH model in order to
-attempt to model the volatility of the stock**]""")
+st.markdown("""### 📝 Project Description
 
-st.markdown("""***Start Date*** 01-05-2025  
+This project performs a time series analysis of **Kroger Co. (KR)** stock returns using classical models such as **ARMA** and **GARCH**. The goal is to investigate the structure of returns and volatility, build appropriate models, and assess their performance. The analysis includes:
+
+- Retrieving historical price data from Yahoo Finance  
+- Computing daily returns and conducting exploratory data analysis (EDA)  
+- Estimating and diagnosing **ARMA models** for returns  
+- Modeling volatility using **GARCH** on residuals from the ARMA model  
+- Performing diagnostic tests, including the **Ljung-Box test** and **ARCH effects test**  
+- Visualizing results  
+
+The project is implemented in Python using `pandas`, `statsmodels`, `arch`, and `matplotlib`, and is presented through an interactive **Streamlit** app.
+            """)
+
+
+
+
+st.markdown("""***Start Date:*** 01-05-2025  
             \n***End Date:*** 01-05-2025  
             \n***Data:*** Daily Prices""")
 
@@ -262,7 +273,7 @@ plot_acf(sq_stand_resids, title="ACF of Squared Standardized Residuals")
 st.pyplot(plt)
 
 st.write("Ljung-Box and Box-Pierce Statistics on Squared Standardized Residuals")
-sq_stand_residual_lb = round(acorr_ljungbox(squared_residuals, boxpierce=True),2)
+sq_stand_residual_lb = round(acorr_ljungbox(sq_stand_resids, boxpierce=True),2)
 st.write(sq_stand_residual_lb)
 
 st.markdown(""":blue[The ACF of the squared standardized residuals show no signs of dependencies. The Ljung-Box and Box-Pierce statistics support that claim.
@@ -270,8 +281,8 @@ As such, the GARCH(1,1) model seems a good fit for the conditional volatility of
 
 st.subheader("Graph of Log Returns & Fitted Conditional Volatility")
 plt.figure(figsize=(15,6))
-plt.plot(garch_volatilities, label="Conditional Volatility", color="orange")
-plt.plot(log_returns, label="Log Returns")
+plt.plot(garch_volatilities, label="Conditional Volatility", color="firebrick")
+plt.plot(log_returns, label="Log Returns", c="dimgrey")
 
 plt.legend()
 plt.tight_layout()
